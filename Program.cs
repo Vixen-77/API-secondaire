@@ -12,7 +12,7 @@ builder.Services.AddControllers(); // tu dit api que tu travail avec des control
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); //connection a la DB
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",

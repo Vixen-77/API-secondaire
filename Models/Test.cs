@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+
 namespace WEBAPPP.Models
 {
     public class Test
     {
-        public int Idd { get; set; }
+        [Key]
+        public int Id { get; set; }  // Convention EF pour la clé primaire
 
-        [Required]  // Rendre Name obligatoire
-        public string Name { get; set; } = string.Empty;
+        [Required]
+        public string Nickname { get; set; } = string.Empty;
     }
 }
