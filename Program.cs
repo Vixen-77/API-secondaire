@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://localhost:5002");  //forcé lapp a tourné au port 5001 toujours 
 
 //  Ajout des services avant builder.Build()
-builder.Services.AddControllers(); // tu dit api que tu travail avec des controlleur 
+builder.Services.AddControllers();// tu dit api que tu travail avec des controlleur 
+builder.Services.AddHttpClient();  //comunication entre API via HTTPclient
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
