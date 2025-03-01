@@ -37,6 +37,6 @@ app.UseRouting();
 app.UseCors("AllowReactApp"); //activation de CORS 
 app.UseAuthorization();
 app.MapControllers(); // Permet à tes contrôleurs d'être accessibles via l'API
-app.MapGet("/", () => "Hello, ASP.NET Core! Répond parfaitement!"); 
+app.MapGet("/", () => "Hello, ASP.NET API IA Core! Répond parfaitement!"); 
 
 app.Run();
