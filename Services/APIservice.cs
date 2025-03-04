@@ -15,7 +15,7 @@ public class TestService
 
     public async Task<List<Test>> GetTestsFromSecondaryAPI()
     {
-        var response = await _httpClient.GetAsync("http://localhost:5002/api/test"); // Remplace avec l'URL de l'API secondaire
+        var response = await _httpClient.GetAsync("http://localhost:5001/api/test"); // Remplace avec l'URL de l'API secondaire
 
         if (response.IsSuccessStatusCode)
         {
