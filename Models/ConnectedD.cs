@@ -8,9 +8,11 @@ namespace WEBAPPP.Models{
 
       [Key]
       public Guid IdO { get; set; }  // ajouter un service pour les prefix 
-
+      
       [JsonIgnore]
-      public required int ADRMAC {get; set;}
+      public required string ADRMAC {get; set;}
+
+      
       
 
 
