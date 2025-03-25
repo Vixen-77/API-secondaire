@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
-using WEBAPPP.Data; 
 using DotNetEnv; 
-using WEBAPPP.Models;
+using Microsoft.Extensions.DependencyModel;
+using LibrarySSMS;
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +29,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
+builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 builder.Services.AddCors(options =>
