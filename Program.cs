@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using DotNetEnv; 
 using Microsoft.Extensions.DependencyModel;
+using WEBAPPP.Hubs;
 using LibrarySSMS;
 
 
@@ -86,5 +87,6 @@ app.UseRouting();
 app.UseCors("AllowReactApp"); // Doit être avant l'auth
 app.UseAuthorization(); // Bien placé avant MapControllers
 app.MapControllers(); // Plus besoin de UseEndpoints !
+app.MapHub<AmbulanceHub>("/hubs/ambulance");
 app.MapGet("/", () => "Hello, ASP.NET Core! Répond parfaitement!");
 app.Run();

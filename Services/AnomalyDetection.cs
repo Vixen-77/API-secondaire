@@ -1,10 +1,12 @@
-using System;
+/*using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using LibrarySSMS;
 using WEBAPPP.DTO;
 using LibrarySSMS.Models;
 using LibrarySSMS.Enums;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 
 
 
@@ -56,35 +58,58 @@ public class AnomalyDetection
         //FIXME: Méthode de détection d'anomalie avec l'algorithme de cette année avec IA intégére
         //TODO: cette methode sera appeler par le HUB si le patient a coonecter un smartwatchnewGen
 
-       public bool AnomalydetectionVariante2(Guid patientId, int age, bool Gender, UserState userState)
+        /* 6   Age                       20002 non-null  float64
+ 7   Gender                    20002 non-null  int64  
+ 8   Weight                    20002 non-null  float64
+ 9   Height                    20002 non-null  float64*/
+
+        
+/*
+   public bool AnomalydetectionVariante2(Guid patientId, int Age, bool Gender, double Weight, double Height, UserState userState)
+{
+    double P = 0.0;
+    double alpha = 0.3;
+
+    // Normalisation manuelle (exemples — à adapter avec tes vraies valeurs)
+
+    // Charger le modèle ONNX
+    using var session = new InferenceSession("Models/ton_model.onnx");
+
+    while (P < 0.7)
+    {
+        for (int i = 0; i < 5; i++)
         {
-            var P= 0.0; //probas d'anomalie null au depart
-            var alpha=0.3; //coeficient de lissage 
-
-           //chargement du model onnxDNN
-
-            while(P<0.7)
+            // Préparer les entrées du modèle
+            var inputData = new float[] { (float)normAge, (float)normGender, (float)normWeight, (float)normHeight };
+            var inputTensor = new DenseTensor<float>(inputData, new[] { 1, 4 });
+            var inputNamed = new List<NamedOnnxValue>
             {
-              for(int i=0;i<5;i++) //simulation ~5seconde de lecture 
-              {
-                //implementation de la lecture des valeur par onnxDNN 
+                NamedOnnxValue.CreateFromTensor("input", inputTensor)
+            };
 
-                P=alpha*P+(1-alpha)*P;
-              }
+            // Lancer la prédiction
+            using IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = session.Run(inputNamed);
+            var predictionTensor = results.First().AsEnumerable<float>().ToArray();
+            var prediction = predictionTensor[0]; // on suppose sortie sigmoid binaire entre 0 et 1
 
-              if (P>=0.4 && P<=0.7)
-              {
-               //pas de cas grave a simple avertissement
-               //appeler le service de notification pour notifier le patient au niveau du dashboard
-                return false;
-              }
-            }
-           //sortie de ka boucle anglobante veut dire probas elevé d'anomalie 70% ou plus
-           //appel du service OBU ou Montre ou Telephone tout depents de l'etat du user
-           return true;
+            // Lissage exponentiel
+            P = alpha * prediction + (1 - alpha) * P;
         }
-       
-       
+
+        if (P >= 0.4 && P < 0.7)
+        {
+            // TODO: Appel au service de notification
+            Console.WriteLine("🟡 Avertissement : risque modéré détecté (P = " + P.ToString("0.00") + ")");
+            return false;
+        }
+    }
+
+    // Cas critique
+    Console.WriteLine("🔴 Alerte : anomalie détectée avec P = " + P.ToString("0.00"));
+
+    // TODO: Appel au service d'urgence OBU / téléphone / montre
+    return true;
+}*/
        
        
        
@@ -229,7 +254,7 @@ public class AnomalyDetection
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
        
-       
+       /*
        
        
         private static (int FC_capte, int PAS_capte, int PAD_capte, double TGS_capte) GenerateRandomValues(int age)
@@ -268,4 +293,4 @@ public class AnomalyDetection
          return (fcCapte, pasCapte, padCapte, tgsCapte);
         } 
     }
-}
+}*/
