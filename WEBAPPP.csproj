@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AspNetCoreRateLimit" Version="5.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="ExcelDataReader" Version="3.7.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0" />
@@ -39,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Library-SSMS\Library-SSMS\Library-SSMS.csproj" />
+    <ProjectReference Include="C:\Users\Home\OneDrive\Documents\cours\PFE\Library\LibrarySQLserveurExpress\Library-SSMS.csproj" />
   </ItemGroup>
 
 </Project>
