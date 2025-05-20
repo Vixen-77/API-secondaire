@@ -53,19 +53,19 @@ public class SVEAmbuController : ControllerBase
         }
         else
         {
-              vehicule.isAmbulanceAvailable = true;
+             /* vehicule.isAmbulanceAvailable = true;
 
               vehicule.isAmbulanceReady = true;
 
               vehicule.isAmbulancePanne = false;
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();*/
             return Ok(new { vehicule.IdEmbulance, vehicule.isAmbulanceAvailable, vehicule.isAmbulanceReady, vehicule.isAmbulancePanne, vehicule.Matricule });
         }
     }
-[HttpPost("statusSVE")]
+[HttpPost("MODIFstatusSVE")]
 [EnableCors("AllowReactApp")]
-public async Task<IActionResult> EtatSVE([FromForm] StatusAmbulanceRequest request)
+public async Task<IActionResult> MODIFEtatSVE([FromForm] StatusAmbulanceRequest request)
 {
     var id = Guid.Parse(request.IdEmbulance);
     var vehicule = await _context.SVEmbulances.FirstOrDefaultAsync(v => v.IdEmbulance == id);
@@ -74,10 +74,10 @@ public async Task<IActionResult> EtatSVE([FromForm] StatusAmbulanceRequest reque
     {
         switch (request.StateAmbu)
         {
-            case "0":  
+            case "0":  // isAvailable = false
                     vehicule.isAmbulanceAvailable = false;
                     vehicule.isAmbulanceReady = false;
-                    vehicule.isAmbulancePanne = false;
+                    
                     await _context.SaveChangesAsync();
                     return Ok("Ambulance is not available.");
                 
@@ -85,17 +85,17 @@ public async Task<IActionResult> EtatSVE([FromForm] StatusAmbulanceRequest reque
               
                     vehicule.isAmbulanceAvailable = true;
                     vehicule.isAmbulanceReady = true;
-                    vehicule.isAmbulancePanne = false;
+                    
                     await _context.SaveChangesAsync();
                     return Ok("Ambulance is available.");
                 
             case "2":
               
-                    vehicule.isAmbulancePanne = true;
+                
                     vehicule.isAmbulanceReady = false;
                     vehicule.isAmbulanceAvailable = false;
                     await _context.SaveChangesAsync();
-                    return Ok("Ambulance is in breakdown.");
+                    return Ok("Ambulance is in breakdown/not is the reserve anymore.");
                 
 
             default:
